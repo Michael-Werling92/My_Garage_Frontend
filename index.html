@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+ 
+    <head>
+        <title> My Garage </title>
+ 
+        <link rel="stylesheet" href="css/index.css">
+ 
+        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="js/models/car.js"></script>
+        <script type="text/javascript" src="js/models/record.js"></script>
+        <script type="text/javascript" src="js/services/API.js"></script>
+    </head>
+    
+    <body>
+ 
+ 
+ 
+ 
+        <h1 style="text-align:center"> Welcome to Your Garage!</h1>
+ 
+ 
+        <div id="project-header" style="text-align:center">
+        </div>
+ 
+ 
+ 
+ 
+        <div class="container" style="text-align:center">
+            <form class="add-car-form">
+              <h3>Add a Car to your garage</h3>
+      
+      
+              <h4>Year:</h4>
+              <input
+              type="text"
+              name="year"
+              value=""
+              placeholder="Year"
+              class="input-text"
+              />
+      
+              <br />
+ 
+              <h4>Make:</h4>
+              <input
+              type="text"
+              name="make"
+              value=""
+              placeholder="Make"
+              class="input-text"
+              />
+      
+              <br />
+              
+              <h4>Model:</h4>
+              <input
+              type="text"
+              name="model"
+              value=""
+              placeholder="Model"
+              class="input-text"
+              />
+      
+              <br />
+ 
+              <h4>Color:</h4>
+              <input
+              type="text"
+              name="color"
+              value=""
+              placeholder="Color"
+              class="input-text"
+              />
+      
+              <br />
+ 
+              <h4>VIN:</h4>
+              <input
+              type="text"
+              name="VIN"
+              value=""
+              placeholder="VIN"
+              class="input-text"
+              />
+      
+              <br />
+ 
+              <h4>Image URL:</h4>
+              <input
+                type="text"
+                name="image"
+                value=""
+                placeholder="Please Provide an Image URL (optional)"
+                class="input-text"
+              />
+      
+      
+              <br />
+              <input
+                type="submit"
+                name="submit"
+                value="Submit new car"
+                class="submit"
+              />
+            </form>
+            <p style="text-align:center">
+                Add a new car to your garage <button id="new-car-btn">Add New Car</button>
+            </p>
+            </div>
+            <div id="garage" style="text-align:center"></div>
+            <div id="file-cabinet" style="text-align:center"></div>
+    </body>
+</html>
