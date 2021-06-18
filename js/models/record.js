@@ -1,19 +1,17 @@
 console.log ("Record.JS loaded")
 
-class Prop{
+class Record{
 
     static all = []
 
 
-    constructor({id, name, image, currently_with, actorID}){
+    constructor({id, mileage, service, car_id}){
 
             this.id = id,
-        this.name = name,
-        this.image = image,
-        this.currently_with = currently_with,
-        this.actorID = actorID
+        this.mileage = mileage,
+        this.service = service,
+        this.car_id = car_id,
 
         Prop.all.push(this)
-
     }
 }
