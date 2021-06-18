@@ -3,7 +3,6 @@ document.addEventListener("click", (event)=>{ console.log("You Clicked on", even
 document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS LISTENING")
 
     API.fetchAllCars()
-    API.fetchMyRecords()
 
     const newCarForm = document.querySelector(".add-car-form")
         newCarForm.addEventListener("submit", event =>{ event.preventDefault(); 
@@ -48,5 +47,9 @@ document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS L
             })
             .then(response => response.json())
             .then(deleteditem.remove())
+          }
+          if(event.target.matches(".maintenance-btn")){
+            const id = event.target.dataset.id
+            API.fetchMyRecords(id)
           }
         })})

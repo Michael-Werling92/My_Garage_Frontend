@@ -10,9 +10,9 @@ class API{
         }))
     }
 
-    static fetchMyRecords(){
+    static fetchMyRecords(id){
 
-        fetch("http://localhost:3000/cars/2/records").then(response => response.json())
+        fetch(`http://localhost:3000/cars/${id}/records`).then(response => response.json())
         .then(fetchedArray => { console.log(fetchedArray);
             const collectionDiv = document.querySelector("#file-cabinet")
                 collectionDiv.innerHTML = ""
