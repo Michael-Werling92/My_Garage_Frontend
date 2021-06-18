@@ -7,12 +7,12 @@ class Record{
 
     constructor({id, mileage, service, car_id}){
 
-            this.id = id,
+        this.id = id,
         this.mileage = mileage,
         this.service = service,
         this.car_id = car_id,
 
-        Prop.all.push(this)
+        Record.all.push(this)
     }
 
     makeACard =()=>{console.log(this)

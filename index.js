@@ -3,9 +3,10 @@ document.addEventListener("click", (event)=>{ console.log("You Clicked on", even
 document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS LISTENING")
 
     API.fetchAllCars()
+    API.fetchMyRecords()
 
-    const newToyForm = document.querySelector(".add-car-form")
-        newToyForm.addEventListener("submit", event =>{ event.preventDefault(); 
+    const newCarForm = document.querySelector(".add-car-form")
+        newCarForm.addEventListener("submit", event =>{ event.preventDefault(); 
           const year = event.target.year.value
           const make = event.target.make.value
           const model = event.target.model.value
