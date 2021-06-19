@@ -22,6 +22,7 @@ class Car{
         return `
             <h2 id="car.id" data-id="${this.id}">${this.year} ${this.make} ${this.model}</h2>
             <img src=${this.image} class="car-avatar" /><br></br>
+            <h3>Color: ${this.color}<br></br> VIN: ${this.vin}</h3>
             <button data-id="${this.id}" class="maintenance-btn"> VIEW MAINTENANCE </button>
             <button data-id="${this.id}" class="delete-btn"> DELETE CAR FROM GARAGE </button>
             `
