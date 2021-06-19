@@ -19,6 +19,7 @@ class API{
           fetchedArray.forEach(record => {  console.log(record);
             const newRecord = new Record(record)
             newRecord.renderRecord(record)
+            window.scrollTo(0,0)
         })})
     }
 }
