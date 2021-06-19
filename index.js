@@ -55,4 +55,5 @@ document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS L
             const id = event.target.dataset.id
             API.fetchMyRecords(id)
           }
-        })})
+        })
+      })
