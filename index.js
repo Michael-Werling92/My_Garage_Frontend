@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS L
               .then(response => response.json())
               .then(theThingWePosted => console.log("Info:", theThingWePosted))
               event.target.reset()
+              location.reload()
       })
 
       const cardsCollection = document.querySelector("#garage")
