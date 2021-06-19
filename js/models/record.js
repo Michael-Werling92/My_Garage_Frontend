@@ -18,8 +18,9 @@ class Record{
     makeACard =()=>{console.log(this)
         
         return `
-            <h2>Mileage: ${this.mileage} </h2>
-            <h2>Service Performed: ${this.service} </h2>
+            Current Maintenance Records:
+            <h3>Service Performed: ${this.service} </h3>
+            <h4>Mileage: ${this.mileage} </h4>
             `
     }
 
