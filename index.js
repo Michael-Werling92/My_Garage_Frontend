@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS L
           const model = event.target.model.value
           const color = event.target.color.value
           const vin = event.target.vin.value
-          const image = event.target.image.value
           
             const submit = event.target.submit
             console.log("YAYYYYYYYYYYY", submit)
@@ -27,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS L
                       "model": model,
                       "color": color,
                       "vin": vin,
-                      "image": image
                 }
               ,)})
               .then(response => response.json())
