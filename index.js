@@ -33,26 +33,4 @@ document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS L
               event.target.reset()
               location.reload()
       })
-
-      const cardsCollection = document.querySelector("#garage")
-        cardsCollection.addEventListener("click", event =>{ event.preventDefault(); 
-          if(event.target.matches(".delete-btn")){
-            const id = event.target.dataset.id
-            const deleteditem = document.getElementById(id)
-            
-            
-            fetch(`http://localhost:3000/cars/${id}`, {
-                
-                method: "DELETE",
-                headers: { "Content-Type": "application/json" }
-                
-            })
-            .then(response => response.json())
-            .then(deleteditem.remove())
-          }
-          if(event.target.matches(".maintenance-btn")){
-            const id = event.target.dataset.id
-            API.fetchMyRecords(id)
-          }
-        })
       })

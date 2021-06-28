@@ -10,6 +10,20 @@ class API{
         }))
     }
 
+    static deleteCar(id){
+    const deleteditem = document.getElementById(id)
+            
+            
+        fetch(`http://localhost:3000/cars/${id}`, {
+                
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+                
+        })
+        .then(response => response.json())
+        .then(deleteditem.remove())
+    }
+
     static fetchMyRecords(id){
 
         fetch(`http://localhost:3000/cars/${id}/records`).then(response => response.json())
