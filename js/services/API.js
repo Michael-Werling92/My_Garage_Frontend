@@ -31,11 +31,10 @@ class API{
         fetch(`http://localhost:3000/cars/${id}/records`).then(response => response.json())
         .then(data => {
             data.sort((a,b) => (a.mileage > b.mileage) ? 1 : ((b.mileage > a.mileage) ? -1 : 0));
-                    const collectionDiv = document.querySelector("#file-cabinet")
-                    collectionDiv.innerHTML = ""
+                const collectionDiv = document.querySelector(`.card[event-id="${id}"]`)
+                collectionDiv.innerHTML = ""
             data.forEach(record => {  console.log(record);
             const newRecord = new Record(record)
             newRecord.renderRecord(record)
-            window.scrollTo(0,0)
         })
-    }) }}
+    })}}
