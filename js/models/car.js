@@ -24,6 +24,7 @@ class Car{
             <img src="https://cdn3.iconfinder.com/data/icons/car-icons-front-views/480/Generic_Car_Front_View-512.png" class="car-avatar" /><br></br>
             <h3>Color: ${this.color}<br></br> VIN: ${this.vin}</h3>
             <button data-id="${this.id}" class="maintenance-btn"> VIEW MAINTENANCE </button>
+            <button data-id="${this.id}" class="add-maintenance-btn"> ADD MAINTENANCE </button>
             <button data-id="${this.id}" class="edit-btn"> EDIT CAR INFO </button>
             <button data-id="${this.id}" class="delete-btn"> DELETE CAR FROM GARAGE </button>
             <div class="card" event-id="${this.id}"></div>
@@ -50,74 +51,141 @@ class Car{
           if(event.target.matches(".edit-btn")){
             console.log(event.target)
             const id = event.target.dataset.id
-            const cardEditing = event.target.closest(".card")
+            const cardEditing = document.querySelector(`.card[event-id="${id}"]`)
             console.log(cardEditing)
             const editCarForm = document.createElement("form")
             editCarForm.innerHTML =`
-                    <form>
-                    <br><br>
-                    <h2>Edit This Car:</h2>
-                    <form class="color-change-form">
+              <form>
+              <br><br>
+              <h2>Edit This Car:</h2>
+              <form class="color-change-form">
 
-                    <br>
-                    <button class="close-button">✖️CLOSE</button>
-                    <br>
+              <br>
+              <button class="close-button">✖️CLOSE</button>
+              <br>
 
-                    <br />
-                    <h4>New Color:</h4>
-                    <input
-                    type="text"
-                    name="color"
-                    value=""
-                    placeholder=""
-                    class="input-car-color"
-                    />
+              <br />
+              <h4>New Color:</h4>
+              <input
+              type="text"
+              name="color"
+              value=""
+              placeholder=""
+              class="input-car-color"
+              />
 
-
-                    <br />
-                    <input
-                    type="submit"
-                    name="submit"
-                    value="Update Car Information"
-                    class="submit-button"
-                    />
-                    </form>
-                    `
-                  cardEditing.append(editCarForm)
+              <br />
+              <input 
+              type="submit"
+              name="submit"
+              value="Update Car Information"
+              class="submit-button"
+              />
+              </form>
+              `
+              cardEditing.appendChild(editCarForm)
                   
 
             const closeButton = editCarForm.querySelector(".close-button")
                 closeButton.addEventListener("click", (event)=>{
-                        editCarForm.remove()
-                        })
+                  editCarForm.remove()
+                  })
 
             editCarForm.addEventListener("click", (event)=>{  event.preventDefault();
-                        if(event.target.matches(".submit-button")){
+                if(event.target.matches(".submit-button")){
 
-                          let updatedColor = editCarForm.querySelector(".input-car-color").value
-                              console.log(updatedColor)
-
-                          const bodyObj = {
-
-                            color: updatedColor, 
-
-                          }
-                          fetch(`http://localhost:3000/cars/${id}`,{
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
+                  let updatedColor = editCarForm.querySelector(".input-car-color").value
+                    console.log(updatedColor)
+                    const bodyObj = {
+                      color: updatedColor, 
+                    }
+                    fetch(`http://localhost:3000/cars/${id}`,{
+                      method: "PATCH",
+                      headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(bodyObj),
-                          })
-                          .then(r => r.json())
-                          .then(updatedCar => {  
-                              console.log("", updatedCar)
-
-                              cardEditing.color = updatedColor.color
-                          })
-                          location.reload()
-                        }
-
-
                     })
-            }
+                      .then(r => r.json())
+                      .then(updatedCar => {  
+                        console.log("", updatedCar)
+                        cardEditing.color = updatedColor.color
+                      })
+                        location.reload()
+                  }
+            })
+          }
+          if(event.target.matches(".add-maintenance-btn")){
+            console.log(event.target)
+            const id = event.target.dataset.id
+            const cardEditing = event.target.closest(".card")
+            console.log(cardEditing)
+            const addRecordForm = document.createElement("form")
+            addRecordForm.innerHTML =`
+              <form>
+              <br><br>
+              <h2>Add Service Record:</h2>
+              <form class="add-serbvice-form">
+
+              <br>
+              <button class="close-button">✖️CLOSE</button>
+              <br>
+
+              <br />
+              <h4>New Service:</h4>
+              <input
+              type="text"
+              name="service"
+              value=""
+              placeholder=""
+              class="input-car-service"
+              />
+
+              <br />
+              <h4>Mileage of Service:</h4>
+              <input
+              type="text"
+              name="mileage"
+              value=""
+              placeholder=""
+              class="input-car-mileage"
+              />
+
+              <br />
+              <input 
+              type="submit"
+              name="submit"
+              value="Update Service Record"
+              class="submit-button"
+              />
+              </form>
+              `
+              cardEditing.append(addRecordForm)
+                  
+
+            const closeButton = addRecordForm.querySelector(".close-button")
+                closeButton.addEventListener("click", (event)=>{
+                  addRecordForm.remove()
+                  })
+
+            addRecordForm.addEventListener("click", (event)=>{  event.preventDefault();
+                if(event.target.matches(".submit-button")){
+
+                  let updatedService = addRecordForm.querySelector(".input-car-service").value
+                    console.log(updatedService)
+                  let updatedMileage = addRecordForm.querySelector(".input-car-mileage").value
+                    console.log(updatedMileage)
+                    const bodyObj = {
+                      "service": updatedService,
+                      "mileage": updatedMileage,
+                      "car_id": id
+                    }
+                    
+                    fetch(`http://localhost:3000/cars/${id}/records`,{
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(bodyObj),
+                    })
+                    .then(response => response.json())
+                    .then(theThingWePosted => console.log("Info:", theThingWePosted))
+                    location.reload()
         }
-    )}}
+    })}})}}
