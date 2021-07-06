@@ -5,7 +5,7 @@ class API{
         fetch("http://localhost:3000/cars")
             .then(response => response.json())
             .then(data => {
-                data.sort((a,b) => (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0)).forEach
+                data.sort((a,b) => (a.year > b.year) ? -1 : ((b.year > a.year) ? 1 : 0)).forEach
                     (car => {console.log(car)
                         const newCar = new Car(car)
                         newCar.renderCar(car)
@@ -37,4 +37,5 @@ class API{
             const newRecord = new Record(record)
             newRecord.renderRecord(record)
         })
-    })}}
+    })
+}}
