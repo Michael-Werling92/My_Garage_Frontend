@@ -46,11 +46,13 @@ class Car{
           }
           if(event.target.matches(".maintenance-btn")){
             const id = event.target.dataset.id
+            document.querySelector(`.card[event-id="${id}"]`).innerHTML = " ";
+            console.log(document.querySelector(`.card[event-id="${id}"]`).innerHTML)
             API.fetchMyRecords(id)
           }
           if(event.target.matches(".edit-btn")){
-            console.log(event.target)
             const id = event.target.dataset.id
+            document.querySelector(`.card[event-id="${id}"]`).innerHTML = " ";
             const cardEditing = document.querySelector(`.card[event-id="${id}"]`)
             console.log(cardEditing)
             const editCarForm = document.createElement("form")
@@ -83,7 +85,7 @@ class Car{
               />
               </form>
               `
-              cardEditing.appendChild(editCarForm)
+              cardEditing.append(editCarForm)
                   
 
             const closeButton = editCarForm.querySelector(".close-button")
@@ -93,30 +95,14 @@ class Car{
 
             editCarForm.addEventListener("click", (event)=>{  event.preventDefault();
                 if(event.target.matches(".submit-button")){
-
-                  let updatedColor = editCarForm.querySelector(".input-car-color").value
-                    console.log(updatedColor)
-                    const bodyObj = {
-                      color: updatedColor, 
-                    }
-                    fetch(`http://localhost:3000/cars/${id}`,{
-                      method: "PATCH",
-                      headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(bodyObj),
-                    })
-                      .then(r => r.json())
-                      .then(updatedCar => {  
-                        console.log("", updatedCar)
-                        cardEditing.color = updatedColor.color
-                      })
-                        location.reload()
+                  API.updateCar(editCarForm, id)
                   }
             })
           }
           if(event.target.matches(".add-maintenance-btn")){
-            console.log(event.target)
             const id = event.target.dataset.id
-            const cardEditing = event.target.closest(".card")
+            document.querySelector(`.card[event-id="${id}"]`).innerHTML = " ";
+            const cardEditing = document.querySelector(`.card[event-id="${id}"]`)
             console.log(cardEditing)
             const addRecordForm = document.createElement("form")
             addRecordForm.innerHTML =`
@@ -168,24 +154,6 @@ class Car{
 
             addRecordForm.addEventListener("click", (event)=>{  event.preventDefault();
                 if(event.target.matches(".submit-button")){
-
-                  let updatedService = addRecordForm.querySelector(".input-car-service").value
-                    console.log(updatedService)
-                  let updatedMileage = addRecordForm.querySelector(".input-car-mileage").value
-                    console.log(updatedMileage)
-                    const bodyObj = {
-                      "service": updatedService,
-                      "mileage": updatedMileage,
-                      "car_id": id
-                    }
-                    
-                    fetch(`http://localhost:3000/cars/${id}/records`,{
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(bodyObj),
-                    })
-                    .then(response => response.json())
-                    .then(theThingWePosted => console.log("Info:", theThingWePosted))
-                    location.reload()
+                  API.addRecord(addRecordForm, id)
         }
     })}})}}

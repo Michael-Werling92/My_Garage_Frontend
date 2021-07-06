@@ -27,7 +27,6 @@ class API{
     }
 
     static fetchMyRecords(id){
-
         fetch(`http://localhost:3000/cars/${id}/records`).then(response => response.json())
         .then(data => {
             data.sort((a,b) => (a.mileage > b.mileage) ? 1 : ((b.mileage > a.mileage) ? -1 : 0));
@@ -37,5 +36,44 @@ class API{
             const newRecord = new Record(record)
             newRecord.renderRecord(record)
         })
-    })
-}}
+    })}
+
+    static updateCar(editCarForm, id){
+        let updatedColor = editCarForm.querySelector(".input-car-color").value
+            console.log(updatedColor)
+            const bodyObj = {
+                color: updatedColor, 
+            }
+            fetch(`http://localhost:3000/cars/${id}`,{
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(bodyObj),
+            })
+            .then(r => r.json())
+            .then(updatedCar => {  
+              console.log("", updatedCar)
+              cardEditing.color = updatedColor.color
+            })
+              location.reload()
+    }
+
+    static addRecord(addRecordForm, id){
+        let updatedService = addRecordForm.querySelector(".input-car-service").value
+        console.log(updatedService)
+        let updatedMileage = addRecordForm.querySelector(".input-car-mileage").value
+        console.log(updatedMileage)
+            const bodyObj = {
+                "service": updatedService,
+                "mileage": updatedMileage,
+                "car_id": id
+            }
+        fetch(`http://localhost:3000/cars/${id}/records`,{
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(bodyObj),
+        })
+        .then(response => response.json())
+        .then(theThingWePosted => console.log("Info:", theThingWePosted))
+        location.reload()
+    }
+}
