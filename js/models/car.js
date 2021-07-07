@@ -33,12 +33,15 @@ class Car{
 
     renderCar =(car)=> {
         const cardDiv = document.createElement("div")
+        console.log(cardDiv)
         cardDiv.classList.add("card")
           cardDiv.setAttribute("data-id", car.id)
             cardDiv.id = car.id
             cardDiv.innerHTML = this.makeACard()
         const collectionDiv = document.querySelector("#garage")
         collectionDiv.append(cardDiv)
+
+
         collectionDiv.addEventListener("click", event =>{ event.preventDefault(); 
           if(event.target.matches(".delete-btn")){
             const id = event.target.dataset.id
@@ -155,4 +158,5 @@ class Car{
                 if(event.target.matches(".submit-button")){
                   API.addRecord(addRecordForm, id)
         }
+          
     })}})}}

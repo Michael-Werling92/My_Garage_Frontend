@@ -2,7 +2,15 @@ document.addEventListener("click", (event)=>{ console.log("You Clicked on", even
 
 document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS LISTENING")
 
-    API.fetchAllCars()
+const colorForm = document.querySelector('.search-box')
+let filteredCars = [ ]
+
+fetch("http://localhost:3000/cars").then(response => response.json())
+        .then(fetchedArray => fetchedArray.forEach
+            (cars => {console.log(cars)
+            const newCar = new Car(cars)
+            newCar.renderCar(cars)
+            filteredCars = cars
 
     const newCarForm = document.querySelector(".add-car-form")
         newCarForm.addEventListener("submit", event =>{ event.preventDefault(); 
@@ -32,5 +40,17 @@ document.addEventListener("DOMContentLoaded", function(){  console.log("DOM IS L
               .then(theThingWePosted => console.log("Info:", theThingWePosted))
               event.target.reset()
               location.reload()
-      })
-      })
+      })      
+      colorForm.addEventListener('input', event => {
+          event.preventDefault()
+          console.log(filteredCars)
+          const term = event.target.value.toLowerCase()
+          let searchResults = filteredCars.filter(filteredCar => {
+          return filteredCar.color.toLowerCase().includes(term)
+          })
+          console.log(searchResults)
+        renderCar(searchResults)
+      })})
+      
+
+    )})

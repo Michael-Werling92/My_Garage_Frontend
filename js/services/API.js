@@ -5,9 +5,9 @@ class API{
             .then(response => response.json())
             .then(data => {
                 data.sort((a,b) => (a.year > b.year) ? -1 : ((b.year > a.year) ? 1 : 0)).forEach
-                    (car => {console.log(car)
-                        const newCar = new Car(car)
-                        newCar.renderCar(car)
+                    (cars => {
+                        const newCar = new Car(cars)
+                        newCar.renderCar(cars)
         })
     })}
 
