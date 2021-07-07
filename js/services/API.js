@@ -1,7 +1,6 @@
 class API{
 
     static fetchAllCars(){
-
         fetch("http://localhost:3000/cars")
             .then(response => response.json())
             .then(data => {
@@ -12,29 +11,29 @@ class API{
         })
     })}
 
-    static deleteCar(){
-    const deleteditem = document.getElementById(id)
-            
-            
-            fetch(`http://localhost:3000/cars/${id}`, {
-                
+    static deleteCar(id){
+        const deleteditem = document.getElementById(id)
+            fetch(`http://localhost:3000/cars/${id}`,{
+    
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" }
-                
+    
             })
             .then(response => response.json())
             .then(deleteditem.remove())
     }
 
+
     static fetchMyRecords(id){
-        fetch(`http://localhost:3000/cars/${id}/records`).then(response => response.json())
-        .then(data => {
+        fetch(`http://localhost:3000/cars/${id}/records`)
+            .then(response => response.json())
+            .then(data => {
             data.sort((a,b) => (a.mileage > b.mileage) ? 1 : ((b.mileage > a.mileage) ? -1 : 0));
                 const collectionDiv = document.querySelector(`.card[event-id="${id}"]`)
                 collectionDiv.innerHTML = ""
             data.forEach(record => {  console.log(record);
-            const newRecord = new Record(record)
-            newRecord.renderRecord(record)
+                const newRecord = new Record(record)
+                newRecord.renderRecord(record)
         })
     })}
 
@@ -49,12 +48,12 @@ class API{
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(bodyObj),
             })
-            .then(r => r.json())
-            .then(updatedCar => {  
-              console.log("", updatedCar)
-              cardEditing.color = updatedColor.color
-            })
-              location.reload()
+                .then(r => r.json())
+                .then(updatedCar => {  
+                    console.log("", updatedCar)
+                    cardEditing.color = updatedColor.color
+                })
+        location.reload()
     }
 
     static addRecord(addRecordForm, id){
@@ -67,13 +66,13 @@ class API{
                 "mileage": updatedMileage,
                 "car_id": id
             }
-        fetch(`http://localhost:3000/cars/${id}/records`,{
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(bodyObj),
-        })
-        .then(response => response.json())
-        .then(theThingWePosted => console.log("Info:", theThingWePosted))
+            fetch(`http://localhost:3000/cars/${id}/records`,{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(bodyObj),
+            })
+                .then(response => response.json())
+                .then(theThingWePosted => console.log("Info:", theThingWePosted))
         location.reload()
     }
 }

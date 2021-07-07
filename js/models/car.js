@@ -24,7 +24,7 @@ class Car{
             <img src="https://cdn3.iconfinder.com/data/icons/car-icons-front-views/480/Generic_Car_Front_View-512.png" class="car-avatar" /><br></br>
             <h3>Color: ${this.color}<br></br> VIN: ${this.vin}</h3>
             <button data-id="${this.id}" class="maintenance-btn"> VIEW MAINTENANCE </button>
-            <button data-id="${this.id}" class="add-maintenance-btn"> ADD MAINTENANCE </button>
+            <button data-id="${this.id}" class="add-maintenance-btn"> ADD MAINTENANCE </button><br></br>
             <button data-id="${this.id}" class="edit-btn"> EDIT CAR INFO </button>
             <button data-id="${this.id}" class="delete-btn"> DELETE CAR FROM GARAGE </button>
             <div class="card" event-id="${this.id}"></div>
@@ -47,7 +47,6 @@ class Car{
           if(event.target.matches(".maintenance-btn")){
             const id = event.target.dataset.id
             document.querySelector(`.card[event-id="${id}"]`).innerHTML = " ";
-            console.log(document.querySelector(`.card[event-id="${id}"]`).innerHTML)
             API.fetchMyRecords(id)
           }
           if(event.target.matches(".edit-btn")){
